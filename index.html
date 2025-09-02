@@ -10,8 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary-orange: #ce7509; /* DarkOrange */
-      --primary-cyan: #00bfff;   /* DeepSkyBlue */
+      --primary-orange: #ce7509;
+      --primary-cyan: #00bfff;
       --main-dark-blue: #13283f;
       --card-dark-blue: #1b263b;
       --border-color: #4a5568;
@@ -28,1466 +28,962 @@
       scroll-behavior: smooth;
     }
 
-    .header {
-      background-color: var(--card-dark-blue);
-      padding: 1rem 0;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .header h1 {
-      margin: 0;
-      color: var(--primary-orange);
-      font-size: 2.5rem;
-      letter-spacing: 1px;
-    }
-
-    .header p {
-      color: var(--subtle-text);
-      font-size: 1.2rem;
-      margin-top: 0.5rem;
-    }
-
-    .contact-info {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-top: 1rem;
-    }
-
-    .contact-info a {
-      color: var(--light-text);
+    a {
       text-decoration: none;
-      font-size: 1.1rem;
-      transition: color 0.3s ease;
+      color: inherit;
+    }
+
+    .header-container {
+      background-color: var(--card-dark-blue);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 1rem 0;
+    }
+
+    .header {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-    }
-
-    .contact-info a i {
-      margin-left: 0.5rem;
-      color: var(--primary-cyan);
-    }
-
-    .contact-info a:hover {
-      color: var(--primary-orange);
-    }
-
-    .main-content {
-      padding: 2rem;
       max-width: 1200px;
       margin: 0 auto;
+      padding: 0 1rem;
     }
 
-    .section-title {
-      text-align: center;
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
       color: var(--primary-orange);
-      font-size: 2.8rem;
-      margin-bottom: 2rem;
-      position: relative;
-      padding-bottom: 0.5rem;
     }
 
-    .section-title::after {
-      content: '';
+    .search-bar {
+      position: relative;
+    }
+
+    .search-bar input {
+      padding: 0.5rem 2.5rem 0.5rem 1rem;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      background-color: #2d3748;
+      color: var(--light-text);
+      transition: all 0.3s ease;
+      width: 250px;
+    }
+
+    .search-bar input:focus {
+      outline: none;
+      border-color: var(--primary-cyan);
+      box-shadow: 0 0 0 2px rgba(0, 191, 255, 0.5);
+    }
+
+    .search-bar .search-icon {
       position: absolute;
-      left: 50%;
-      bottom: 0;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 4px;
-      background-color: var(--primary-cyan);
-      border-radius: 2px;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--subtle-text);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .catalog-title {
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--primary-cyan);
     }
 
     .product-catalog {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     }
 
     .product {
       background-color: var(--card-dark-blue);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
+      border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1.5rem;
-      text-align: center;
       cursor: pointer;
     }
 
     .product:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .product-image-container {
+      height: 200px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #2d3748;
     }
 
     .product img {
-      max-width: 100%;
-      height: 200px;
-      object-fit: contain;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-      border: 1px solid var(--primary-cyan);
-      padding: 0.5rem;
-      background-color: #fff; /* White background for images */
-    }
-
-    .product h2 {
-      font-size: 1.8rem;
-      color: var(--light-text);
-      margin-bottom: 1rem;
-    }
-
-    .product ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
       width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
     }
 
-    .product ul li {
+    .product:hover img {
+      transform: scale(1.05);
+    }
+
+    .product-info {
+      padding: 1.5rem;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      margin-bottom: 0.7rem;
-      color: var(--subtle-text);
-      font-size: 1rem;
+      text-align: center;
     }
 
-    .product ul li i {
-      margin-left: 0.8rem;
-      color: var(--primary-cyan);
-      font-size: 1.2rem;
-    }
-
-    .product .price {
-      font-size: 1.6rem;
-      color: var(--primary-orange);
-      font-weight: 700;
-      margin: 1rem 0;
-    }
-
-    .product .whatsapp {
-      display: inline-block;
-      background-color: #25D366; /* WhatsApp green */
-      color: white;
-      padding: 0.8rem 1.5rem;
-      border-radius: 50px;
-      text-decoration: none;
+    .product-name {
+      font-size: 1.25rem;
       font-weight: 600;
-      transition: background-color 0.3s ease;
-      margin-top: 1rem;
+      color: var(--light-text);
       margin-bottom: 0.5rem;
     }
 
-    .product .whatsapp:hover {
-      background-color: #1DA851;
+    .product-specs {
+      font-size: 0.875rem;
+      color: var(--subtle-text);
+      list-style-type: none;
+      padding: 0;
+      margin-bottom: 1rem;
+      text-align: right;
     }
 
-    .details-button {
-      background-color: var(--primary-cyan);
-      color: var(--main-dark-blue);
-      border: none;
-      padding: 0.8rem 1.5rem;
-      border-radius: 50px;
+    .product-specs li {
+      margin-bottom: 0.25rem;
+    }
+
+    .price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-orange);
+    }
+
+    .call-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 2rem;
+      background-color: #25d366;
+      color: white;
+      border-radius: 5px;
       font-weight: 600;
-      cursor: pointer;
       transition: background-color 0.3s ease;
-      margin-top: 0.5rem;
     }
 
-    .details-button:hover {
-      background-color: #009acd;
+    .call-btn i {
+      margin-right: 0.5rem;
     }
 
-    /* Modal Styles */
+    .call-btn:hover {
+      background-color: #128c7e;
+    }
+
+    .footer {
+      background-color: var(--card-dark-blue);
+      color: var(--subtle-text);
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    /* Modal styles */
     .modal {
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 1000; /* Sit on top */
+      display: none;
+      position: fixed;
+      z-index: 10;
       left: 0;
       top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
       justify-content: center;
       align-items: center;
-      padding: 2rem;
+      backdrop-filter: blur(5px);
     }
 
     .modal-content {
       background-color: var(--card-dark-blue);
       padding: 2rem;
-      border-radius: 12px;
+      border-radius: 10px;
+      max-width: 600px;
       width: 90%;
-      max-width: 700px;
       position: relative;
+      animation: fadeIn 0.3s ease-out;
       display: flex;
       flex-direction: column;
       align-items: center;
-      color: var(--light-text);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+      text-align: center;
     }
 
-    .close-button {
-      color: var(--light-text);
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .close-btn {
       position: absolute;
-      top: 15px;
-      right: 25px;
-      font-size: 35px;
+      top: 10px;
+      left: 10px;
+      color: var(--subtle-text);
+      font-size: 1.5rem;
       font-weight: bold;
       cursor: pointer;
       transition: color 0.3s ease;
     }
 
-    .close-button:hover,
-    .close-button:focus {
-      color: var(--primary-orange);
-      text-decoration: none;
+    .close-btn:hover {
+      color: var(--light-text);
     }
 
-    .modal-img {
+    .modal-image {
       max-width: 100%;
       height: 250px;
       object-fit: contain;
       border-radius: 8px;
-      margin-bottom: 1.5rem;
-      border: 2px solid var(--primary-cyan);
-      padding: 0.75rem;
-      background-color: #fff;
+      margin-bottom: 1rem;
     }
 
-    .modal-content h2 {
-      font-size: 2.2rem;
+    .modal-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-cyan);
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-price {
+      font-size: 2rem;
+      font-weight: 700;
       color: var(--primary-orange);
       margin-bottom: 1rem;
     }
 
-    .modal-content ul {
-      list-style: none;
+    .modal-specs {
+      list-style-type: none;
       padding: 0;
-      margin: 0;
-      width: 80%; /* Adjust width for better readability */
-      margin-bottom: 1.5rem;
-    }
-
-    .modal-content ul li {
-      display: flex;
-      align-items: center;
-      margin-bottom: 0.8rem;
-      color: var(--subtle-text);
-      font-size: 1.1rem;
-      justify-content: flex-end; /* Align specs to the right in modal */
       text-align: right;
+      font-size: 1rem;
+      color: var(--light-text);
     }
 
-    .modal-content ul li i {
-      margin-left: 0.8rem;
-      margin-right: 0;
-      color: var(--primary-cyan);
-      font-size: 1.3rem;
+    .modal-specs li {
+      margin-bottom: 0.5rem;
     }
 
-    .modal-content .price {
-      font-size: 2rem;
-      color: var(--primary-orange);
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-    }
-
-    .modal-content .whatsapp {
-      background-color: #25D366;
-      color: white;
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 700;
-      transition: background-color 0.3s ease;
-      font-size: 1.2rem;
-    }
-
-    .modal-content .whatsapp:hover {
-      background-color: #1DA851;
-    }
-
-    /* Footer Styles */
-    .footer {
-      background-color: var(--card-dark-blue);
-      padding: 2rem;
-      text-align: center;
-      color: var(--subtle-text);
-      margin-top: 3rem;
-      border-top: 1px solid var(--border-color);
-    }
-
-    .footer p {
-      margin: 0.5rem 0;
-    }
-
-    .footer a {
-      color: var(--primary-cyan);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .footer a:hover {
-      color: var(--primary-orange);
-    }
-
-    /* Responsive Design */
     @media (max-width: 768px) {
-      .header h1 {
-        font-size: 2rem;
-      }
-
-      .header p {
-        font-size: 1rem;
-      }
-
-      .contact-info {
+      .header {
         flex-direction: column;
-        gap: 0.5rem;
-      }
-
-      .main-content {
-        padding: 1rem;
-      }
-
-      .section-title {
-        font-size: 2rem;
-      }
-
-      .product-catalog {
-        grid-template-columns: 1fr;
-      }
-
-      .product {
-        padding: 1rem;
-      }
-
-      .product img {
-        height: 180px;
-      }
-
-      .product h2 {
-        font-size: 1.5rem;
-      }
-
-      .product .price {
-        font-size: 1.4rem;
-      }
-
-      .modal-content {
-        width: 95%;
-        padding: 1.5rem;
-      }
-
-      .modal-img {
-        height: 200px;
-      }
-
-      .modal-content h2 {
-        font-size: 1.8rem;
-      }
-
-      .modal-content ul {
-        width: 95%;
-      }
-
-      .modal-content ul li {
-        font-size: 1rem;
-      }
-
-      .modal-content .price {
-        font-size: 1.6rem;
-      }
-
-      .modal-content .whatsapp {
-        padding: 0.8rem 1.5rem;
-        font-size: 1rem;
+        gap: 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <header class="header">
-    <h1>شركة الحسين للاب توب</h1>
-    <p>أفضل أجهزة اللابتوب بأسعار لا تقبل المنافسة</p>
-    <div class="contact-info">
-      <a href="tel:+201060169569"><i class="fas fa-phone"></i> 01060169569</a>
-      <a href="https://wa.me/201060169569" target="_blank"><i class="fab fa-whatsapp"></i> واتساب</a>
-      <a href="https://www.facebook.com/elhussenlaptop/" target="_blank"><i class="fab fa-facebook"></i> فيسبوك</a>
+
+  <header class="header-container">
+    <div class="header">
+      <div class="logo">الحسين للاب توب</div>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="ابحث عن موديل...">
+        <i class="fas fa-search search-icon"></i>
+      </div>
     </div>
   </header>
 
-  <main class="main-content">
-    <h2 class="section-title">أحدث عروضنا</h2>
+  <div class="container">
+    <h1 class="catalog-title">أجهزة اللاب توب المتاحة</h1>
+    <div class="product-catalog" id="productCatalog">
 
-    <div id="productCatalog" class="product-catalog">
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_8470p.jpg" alt="HP 8470p">
-            <h2>HP 8470p</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i7 جيل ثالث</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 500</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: AMD HD 7570 1G UP TO 8G</li>
-            </ul>
-            <p class="price">السعر: 4500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_8560w.jpg" alt="HP 8560w">
-            <h2>HP 8560w</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل ثاني</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 500</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: AMD M4000 1G UP TO 8G</li>
-            </ul>
-            <p class="price">السعر: 4500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_6520.jpg" alt="DELL 6520">
-            <h2>DELL 6520</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i7 جيل ثاني</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 500</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: N.VIDIA 3100 UP TO 8G</li>
-            </ul>
-            <p class="price">السعر: 4500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_840_g1.jpg" alt="Hp 840 g1">
-            <h2>Hp 840 g1</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل رابع</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 500</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 520 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 4500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="lenovo_x260.jpg" alt="Lenovo x260">
-            <h2>Lenovo x260</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i3 جيل سادس</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 12.5 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 520 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 4500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_15_ra_new_model.jpg" alt="Hp 15-ra شكل حديث">
-            <h2>Hp 15-ra شكل حديث</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: Celeron N3060 جيل سادس</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 128 + 500</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 520 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 5000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_8570w.jpg" alt="HP 8570W">
-            <h2>HP 8570W</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i7 جيل ثالث</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 500</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: AMD M4000 1G UP TO 8G</li>
-            </ul>
-            <p class="price">السعر: 5000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_5480.jpg" alt="DELL 5480">
-            <h2>DELL 5480</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i3 جيل سابع</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 520 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 5000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_5450.jpg" alt="DELL 5450">
-            <h2>DELL 5450</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل خامس</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 520 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 5500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="lenovo_t460.jpg" alt="Lenovo T460">
-            <h2>Lenovo T460</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل سادس</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 520 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 5800 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_640_g2.jpg" alt="Hp 640 g2">
-            <h2>Hp 640 g2</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل سادس</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 520 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 6500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="lenovo_a475.jpg" alt="Lenovo A475">
-            <h2>Lenovo A475</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: AMD A12-9410 جيل تاسع</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: AMD HD R6 1G UP TO 8G</li>
-            </ul>
-            <p class="price">السعر: 6500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_5470.jpg" alt="DELL 5470">
-            <h2>DELL 5470</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل سادس</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 520 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 6600 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_840_g3.jpg" alt="Hp 840 g3">
-            <h2>Hp 840 g3</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل سادس</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 520 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 7000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_640_g3.jpg" alt="Hp 640 g3">
-            <h2>Hp 640 g3</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل سابع</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 520 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 7200 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_450_g3.jpg" alt="Hp 450 g3">
-            <h2>Hp 450 g3</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل سادس</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 620 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 7400 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_5580.jpg" alt="DELL 5580">
-            <h2>DELL 5580</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل سادس</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 620 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 7500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_650_g2.jpg" alt="Hp 650 g2">
-            <h2>Hp 650 g2</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل سادس</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 520 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 7500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_850_g3.jpg" alt="Hp 850 g3">
-            <h2>Hp 850 g3</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل سادس</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 620 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 8000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_5490.jpg" alt="DELL 5490">
-            <h2>DELL 5490</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل ثامن</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 620 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 8000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_455_95.jpg" alt="Hp 455 95">
-            <h2>Hp 455 95</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: AMD A9-9410 جيل تاسع</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: AMD HD R6 1G UP TO 8G</li>
-            </ul>
-            <p class="price">السعر: 8500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_5400.jpg" alt="DELL 5400">
-            <h2>DELL 5400</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل ثامن</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 620 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 8500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="lenovo_t470.jpg" alt="Lenovo T470">
-            <h2>Lenovo T470</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل سابع</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 620 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 8500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_7480.jpg" alt="DELL 7480">
-            <h2>DELL 7480</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل سابع</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 620 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 8500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_840_g4.jpg" alt="Hp 840 g4">
-            <h2>Hp 840 g4</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل سابع</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 620 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 8500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_840_g5.jpg" alt="Hp 840 g5">
-            <h2>Hp 840 g5</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل ثامن</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 620 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 9000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_5500_i5_8th.jpg" alt="DELL 5500">
-            <h2>DELL 5500</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل ثامن</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 620 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 9000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="lenovo_t480.jpg" alt="Lenovo T480">
-            <h2>Lenovo T480</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل ثامن</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 620 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 9000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_7490.jpg" alt="DELL 7490">
-            <h2>DELL 7490</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل ثامن</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 620 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 9000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_840_g6.jpg" alt="Hp 840 g6">
-            <h2>Hp 840 g6</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل ثامن</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 620 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 9500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_5590.jpg" alt="DELL 5590">
-            <h2>DELL 5590</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل ثامن</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 620 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 9500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="lenovo_t490.jpg" alt="Lenovo T490">
-            <h2>Lenovo T490</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل ثامن</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 620 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 9500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_830_g5.jpg" alt="Hp 830 g5">
-            <h2>Hp 830 g5</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i7 جيل ثامن</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 13.3 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL UHD 620 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 9500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_5300.jpg" alt="DELL 5300">
-            <h2>DELL 5300</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل ثامن</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 13.3 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL UHD 620 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 9500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_255_g8.jpg" alt="HP 255 G8">
-            <h2>HP 255 G8</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: Ryzen 3 جيل عاشر</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: AMD vega 8 UP TO 8G</li>
-            </ul>
-            <p class="price">السعر: 9500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_745_g5.jpg" alt="HP 745 G5">
-            <h2>HP 745 G5</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: Ryzen 3 جيل عاشر</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: AMD vega 6 1G UP TO 8G</li>
-            </ul>
-            <p class="price">السعر: 9500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_840_g7.jpg" alt="Hp 840 g7">
-            <h2>Hp 840 g7</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل عاشر</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL UHD 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 10000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="lenovo_t14_gen_1.jpg" alt="Lenovo T14 Gen 1">
-            <h2>Lenovo T14 Gen 1</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل عاشر</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL UHD 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 10000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_440_g6.jpg" alt="Hp 440 g6">
-            <h2>Hp 440 g6</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل ثامن</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL HD 620 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 10000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_5570.jpg" alt="DELL 5570">
-            <h2>DELL 5570</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i7 جيل سادس</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: AMD HD R7 2G UP TO 12G</li>
-            </ul>
-            <p class="price">السعر: 10000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_5410.jpg" alt="DELL 5410">
-            <h2>DELL 5410</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل عاشر</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL UHD 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 10500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_830_g6.jpg" alt="Hp 830 g6">
-            <h2>Hp 830 g6</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i7 جيل ثامن</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 13.3 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL UHD 620 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 10500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_745_g6.jpg" alt="HP 745 G6">
-            <h2>HP 745 G6</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: Ryzen 5 جيل عاشر</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: AMD vega 8 2G UP TO 8G</li>
-            </ul>
-            <p class="price">السعر: 10500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_845_g7.jpg" alt="HP 845 G7">
-            <h2>HP 845 G7</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: Ryzen 5 جيل عاشر</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: AMD vega 8 UP TO 8G</li>
-            </ul>
-            <p class="price">السعر: 10500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_455_g7.jpg" alt="HP 455 G7">
-            <h2>HP 455 G7</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: Ryzen 7 جيل عاشر</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: AMD vega 8 2G UP TO 8G</li>
-            </ul>
-            <p class="price">السعر: 10500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_5501.jpg" alt="DELL 5501">
-            <h2>DELL 5501</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 H جيل تاسع</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL UHD 620 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 10500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_840_g8.jpg" alt="Hp 840 g8">
-            <h2>Hp 840 g8</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل 11</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL Iris Xe 1G UP TO 8G</li>
-            </ul>
-            <p class="price">السعر: 11000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_15_dy2073_touch.jpg" alt="HP 15-dy2073 تاتش - شكل حديث">
-            <h2>HP 15-dy2073 تاتش - شكل حديث</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل 11</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة تاتش</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL Iris Xe 1G UP TO 8G</li>
-            </ul>
-            <p class="price">السعر: 11000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_840_g9.jpg" alt="Hp 840 g9">
-            <h2>Hp 840 g9</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل 12</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 14.1 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL Iris Xe 1G UP TO 8G</li>
-            </ul>
-            <p class="price">السعر: 12000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_3593_شكل_حديث.jpg" alt="DELL 3593 شكل حديث">
-            <h2>DELL 3593 شكل حديث</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل عاشر</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL Iris Xe 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 12000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_3511_شكل_حديث.jpg" alt="DELL 3511 شكل حديث">
-            <h2>DELL 3511 شكل حديث</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل عاشر</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL Iris Xe 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 12000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_zbook_g3.jpg" alt="HP ZBOOK G3">
-            <h2>HP ZBOOK G3</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i7 HQ جيل سادس</li>
-                <li><i class="fas fa-memory"></i> الرام: 16G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: N.VIDIA M1000 2G UP TO 20G</li>
-            </ul>
-            <p class="price">السعر: 13000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_3520_شكل_حديث.jpg" alt="DELL 3520 شكل حديث">
-            <h2>DELL 3520 شكل حديث</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 جيل حادي عشر</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL Iris Xe Graphics 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 13000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_5511_شكل_حديث.jpg" alt="DELL 5511 شكل حديث">
-            <h2>DELL 5511 شكل حديث</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i7 جيل عاشر</li>
-                <li><i class="fas fa-memory"></i> الرام: 8G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL Iris Xe 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 13000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_zbook_g3_studio.jpg" alt="HP ZBOOK G3 studio">
-            <h2>HP ZBOOK G3 studio</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i7 HQ جيل سادس</li>
-                <li><i class="fas fa-memory"></i> الرام: 16G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: N.VIDIA M2000 4G UP TO 20G</li>
-            </ul>
-            <p class="price">السعر: 14500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_7510_تاتش.jpg" alt="DELL 7510 تاتش">
-            <h2>DELL 7510 تاتش</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: Xeon E3-1505M جيل سابع</li>
-                <li><i class="fas fa-memory"></i> الرام: 16G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: N.VIDIA M2000 4G UP TO 20G</li>
-            </ul>
-            <p class="price">السعر: 15000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_7710.jpg" alt="DELL 7710">
-            <h2>DELL 7710</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i7 HQ جيل سادس</li>
-                <li><i class="fas fa-memory"></i> الرام: 16G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: N.VIDIA M3000 4G UP TO 20G</li>
-            </ul>
-            <p class="price">السعر: 15500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_zbook_g4_studio.jpg" alt="HP ZBOOK G4 studio">
-            <h2>HP ZBOOK G4 studio</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i7 HQ جيل سابع</li>
-                <li><i class="fas fa-memory"></i> الرام: 16G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 256 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: N.VIDIA M1200 4G UP TO 20G</li>
-            </ul>
-            <p class="price">السعر: 16000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_7540.jpg" alt="DELL 7540">
-            <h2>DELL 7540</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 HQ جيل تاسع</li>
-                <li><i class="fas fa-memory"></i> الرام: 16G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 512 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: N.VIDIA T1000 4G UP TO 40G</li>
-            </ul>
-            <p class="price">السعر: 17000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_zbook_firefly_g7.jpg" alt="HP ZBOOK Firefly G7">
-            <h2>HP ZBOOK Firefly G7</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i7 جيل عاشر</li>
-                <li><i class="fas fa-memory"></i> الرام: 16G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 512 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: INTEL UHD Graphics 1G UP TO 2G</li>
-            </ul>
-            <p class="price">السعر: 18000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_7530.jpg" alt="DELL 7530">
-            <h2>DELL 7530</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i7 HQ جيل ثامن</li>
-                <li><i class="fas fa-memory"></i> الرام: 16G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 512 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: N.VIDIA P2000 4G UP TO 40G</li>
-            </ul>
-            <p class="price">السعر: 19000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_7730.jpg" alt="DELL 7730">
-            <h2>DELL 7730</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 H جيل ثامن</li>
-                <li><i class="fas fa-memory"></i> الرام: 16G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 512 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 17.3 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: AMD FirePro WX 7100 8G UP TO 40G</li>
-            </ul>
-            <p class="price">السعر: 20000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_5530.jpg" alt="DELL 5530">
-            <h2>DELL 5530</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i7 H جيل ثامن</li>
-                <li><i class="fas fa-memory"></i> الرام: 16G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 512 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: N.VIDIA P1000 4G UP TO 20G</li>
-            </ul>
-            <p class="price">السعر: 21500 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_zbook_g5_x360_تاتش.jpg" alt="HP ZBOOK G5 x360 تاتش">
-            <h2>HP ZBOOK G5 x360 تاتش</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: Xeon E-2176M جيل تاسع</li>
-                <li><i class="fas fa-memory"></i> الرام: 16G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 512 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: N.VIDIA P1000 4G UP TO 20G</li>
-            </ul>
-            <p class="price">السعر: 22000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="hp_zbook_g6.jpg" alt="HP ZBOOK G6">
-            <h2>HP ZBOOK G6</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 H جيل تاسع</li>
-                <li><i class="fas fa-memory"></i> الرام: 16G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 512 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: N.VIDIA T1000 4G UP TO 20G</li>
-            </ul>
-            <p class="price">السعر: 23000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_7550.jpg" alt="DELL 7550">
-            <h2>DELL 7550</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i5 H جيل عاشر</li>
-                <li><i class="fas fa-memory"></i> الرام: 16G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 512 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: N.VIDIA T2000 4G UP TO 20G</li>
-            </ul>
-            <p class="price">السعر: 25000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_3561.jpg" alt="DELL 3561">
-            <h2>DELL 3561</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i7 H جيل حادي عشر</li>
-                <li><i class="fas fa-memory"></i> الرام: 32G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 512 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 15.6 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: N.VIDIA T1200 4G UP TO 20G</li>
-            </ul>
-            <p class="price">السعر: 28000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    
-        <div class="product" onclick="openModal(this)">
-            <img src="dell_7750.jpg" alt="DELL 7750">
-            <h2>DELL 7750</h2>
-            <ul>
-                <li><i class="fas fa-microchip"></i> المعالج: CORE i7 H جيل عاشر</li>
-                <li><i class="fas fa-memory"></i> الرام: 32G</li>
-                <li><i class="fas fa-hdd"></i> الهارد: 512 SSD</li>
-                <li><i class="fas fa-desktop"></i> الشاشة: 17.3 بوصة</li>
-                <li><i class="fas fa-image"></i> كارت شاشة: N.VIDIA RTX 3000 6G UP TO 40G</li>
-            </ul>
-            <p class="price">السعر: 30000 جنيه</p>
-            <a href="https://wa.me/201060169569" target="_blank" class="whatsapp">تواصل واتساب</a>
-            <button class="details-button">التفاصيل</button>
-        </div>
-    </div>
-  </main>
+      <div class="product" onclick="openModal('HP 745 g4', '6000 جنيه', 'assets/HP 745 g4.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20745%20g4%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/HP 745 g4.jpg" alt="HP 745 g4">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">HP 745 g4</h2>
+          <ul class="product-specs">
+            <li>المعالج: AMD A10-8410 جيل ثامن</li>
+            <li>الرام: 8G</li>
+            <li>الهارد: 256 SSD</li>
+            <li>الشاشة: 15.6 بوصة</li>
+            <li>كارت الشاشة: AMD HD R6 1G UP TO 8G</li>
+          </ul>
+          <span class="price">6000 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20745%20g4%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+      
+      <div class="product" onclick="openModal('HP 640 g2', '6000 جنيه', 'assets/HP 640 g2.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20640%20g2%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/HP 640 g2.jpg" alt="HP 640 g2">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">HP 640 g2</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i5 الجيل السادس</li>
+            <li>الرام: 8G</li>
+            <li>الهارد: 256 SSD</li>
+            <li>الشاشة: 14.1 بوصة</li>
+            <li>كارت الشاشة: INTEL HD 520 1G UP TO 2G</li>
+          </ul>
+          <span class="price">6000 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20640%20g2%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
 
-  <div id="productModal" class="modal">
-    <div class="modal-content">
-      <span class="close-button" onclick="closeModal()">&times;</span>
-      <img id="modalProductImage" class="modal-img" src="" alt="Product Image">
-      <h2 id="modalProductName"></h2>
-      <ul id="modalProductSpecs">
-        </ul>
-      <p id="modalProductPrice" class="price"></p>
-      <a id="modalWhatsappLink" href="" target="_blank" class="whatsapp">تواصل واتساب</a>
+      <div class="product" onclick="openModal('DELL M4800', '6200 جنيه', 'assets/DELL M4800.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%20M4800%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/DELL M4800.jpg" alt="DELL M4800">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">DELL M4800</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i7 MQ الجيل الرابع</li>
+            <li>الرام: 8G</li>
+            <li>الهارد: 180 SSD</li>
+            <li>الشاشة: 15.6 بوصة</li>
+            <li>كارت الشاشة: N.VIDIA K1100 2G UP TO 20G</li>
+          </ul>
+          <span class="price">6200 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%20M4800%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+
+      <div class="product" onclick="openModal('DELL 5480', '6500 جنيه', 'assets/DELL 5480.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%205480%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/DELL 5480.jpg" alt="DELL 5480">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">DELL 5480</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i5 الجيل السابع</li>
+            <li>الرام: 8G</li>
+            <li>الهارد: 256 SSD</li>
+            <li>الشاشة: 14.1 بوصة</li>
+            <li>كارت الشاشة: INTEL HD 520</li>
+          </ul>
+          <span class="price">6500 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%205480%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+
+      <div class="product" onclick="openModal('DELL 5470', '6500 جنيه', 'assets/DELL 5470.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%205470%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/DELL 5470.jpg" alt="DELL 5470">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">DELL 5470</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i5 الجيل السادس</li>
+            <li>الرام: 8G</li>
+            <li>الهارد: 256 SSD</li>
+            <li>الشاشة: 14.1 بوصة</li>
+            <li>كارت الشاشة: INTEL HD 520 1G UP TO 2G</li>
+          </ul>
+          <span class="price">6500 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%205470%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+      
+      <div class="product" onclick="openModal('HP ZBOOK G2 15', '6000 جنيه', 'assets/HP ZBOOK G2 15.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20ZBOOK%20G2%2015%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/HP ZBOOK G2 15.jpg" alt="HP ZBOOK G2 15">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">HP ZBOOK G2 15</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i7 MQ الجيل الرابع</li>
+            <li>الرام: 8G</li>
+            <li>الهارد: 256 SSD</li>
+            <li>الشاشة: 15.6 بوصة</li>
+            <li>كارت الشاشة: N.VIDIA M500 1G UP TO 20G</li>
+          </ul>
+          <span class="price">6000 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20ZBOOK%20G2%2015%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+
+      <div class="product" onclick="openModal('DELL M6800', '8500 جنيه', 'assets/DELL M6800.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%20M6800%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/DELL M6800.jpg" alt="DELL M6800">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">DELL M6800</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i7 MQ الجيل الرابع</li>
+            <li>الرام: 16G</li>
+            <li>الهارد: 256 SSD</li>
+            <li>الشاشة: 17.3 بوصة</li>
+            <li>كارت الشاشة: N.VIDIA K4100M 4G UP TO 20G</li>
+          </ul>
+          <span class="price">8500 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%20M6800%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+
+      <div class="product" onclick="openModal('DELL 5580', '7000 جنيه', 'assets/DELL 5580.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%205580%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/DELL 5580.jpg" alt="DELL 5580">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">DELL 5580</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i5 الجيل السابع</li>
+            <li>الرام: 8G</li>
+            <li>الهارد: 256 SSD</li>
+            <li>الشاشة: 15.6 بوصة</li>
+            <li>كارت الشاشة: INTEL HD 620</li>
+          </ul>
+          <span class="price">7000 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%205580%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+      
+      <div class="product" onclick="openModal('HP 745 g5', '7500 جنيه', 'assets/HP 745 g5.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20745%20g5%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/HP 745 g5.jpg" alt="HP 745 g5">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">HP 745 g5</h2>
+          <ul class="product-specs">
+            <li>المعالج: AMD RYZEN 7 PRO 2700U</li>
+            <li>الرام: 16G</li>
+            <li>الهارد: 512 SSD</li>
+            <li>الشاشة: 14.1 بوصة</li>
+            <li>كارت الشاشة: AMD RADEON VEGA 10 GRAPHICS</li>
+          </ul>
+          <span class="price">7500 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20745%20g5%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+
+      <div class="product" onclick="openModal('DELL 5490', '7500 جنيه', 'assets/DELL 5490.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%205490%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/DELL 5490.jpg" alt="DELL 5490">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">DELL 5490</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i5 الجيل الثامن</li>
+            <li>الرام: 8G</li>
+            <li>الهارد: 256 SSD</li>
+            <li>الشاشة: 14.1 بوصة</li>
+            <li>كارت الشاشة: INTEL HD 620</li>
+          </ul>
+          <span class="price">7500 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%205490%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+      
+      <div class="product" onclick="openModal('DELL 5570', '7500 جنيه', 'assets/DELL 5570.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%205570%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/DELL 5570.jpg" alt="DELL 5570">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">DELL 5570</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i5 الجيل الثامن</li>
+            <li>الرام: 8G</li>
+            <li>الهارد: 256 SSD</li>
+            <li>الشاشة: 15.6 بوصة</li>
+            <li>كارت الشاشة: INTEL HD 620</li>
+          </ul>
+          <span class="price">7500 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%205570%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+      
+      <div class="product" onclick="openModal('HP 840 g5', '8500 جنيه', 'assets/HP 840 g5.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20840%20g5%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/HP 840 g5.jpg" alt="HP 840 g5">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">HP 840 g5</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i5 الجيل الثامن</li>
+            <li>الرام: 8G</li>
+            <li>الهارد: 256 SSD</li>
+            <li>الشاشة: 14.1 بوصة</li>
+            <li>كارت الشاشة: INTEL HD 620</li>
+          </ul>
+          <span class="price">8500 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20840%20g5%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+      
+      <div class="product" onclick="openModal('HP ZBOOK G3', '9000 جنيه', 'assets/HP ZBOOK G3.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20ZBOOK%20G3%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/HP ZBOOK G3.jpg" alt="HP ZBOOK G3">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">HP ZBOOK G3</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i7 HQ الجيل السادس</li>
+            <li>الرام: 16G</li>
+            <li>الهارد: 256 SSD</li>
+            <li>الشاشة: 15.6 بوصة</li>
+            <li>كارت الشاشة: N.VIDIA M1000M 2G UP TO 20G</li>
+          </ul>
+          <span class="price">9000 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20ZBOOK%20G3%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+
+      <div class="product" onclick="openModal('DELL 5590', '9500 جنيه', 'assets/DELL 5590.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%205590%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/DELL 5590.jpg" alt="DELL 5590">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">DELL 5590</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i5 الجيل الثامن</li>
+            <li>الرام: 8G</li>
+            <li>الهارد: 256 SSD</li>
+            <li>الشاشة: 15.6 بوصة</li>
+            <li>كارت الشاشة: INTEL HD 620</li>
+          </ul>
+          <span class="price">9500 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%205590%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+      
+      <div class="product" onclick="openModal('HP 850 g5', '10000 جنيه', 'assets/HP 850 g5.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20850%20g5%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/HP 850 g5.jpg" alt="HP 850 g5">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">HP 850 g5</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i5 الجيل الثامن</li>
+            <li>الرام: 16G</li>
+            <li>الهارد: 256 SSD</li>
+            <li>الشاشة: 15.6 بوصة</li>
+            <li>كارت الشاشة: INTEL HD 620</li>
+          </ul>
+          <span class="price">10000 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20850%20g5%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+      
+      <div class="product" onclick="openModal('HP 755 G5', '9500 جنيه', 'assets/HP 755 G5.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20755%20G5%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/HP 755 G5.jpg" alt="HP 755 G5">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">HP 755 G5</h2>
+          <ul class="product-specs">
+            <li>المعالج: AMD RYZEN 7 PRO 2700U</li>
+            <li>الرام: 16G</li>
+            <li>الهارد: 512 SSD</li>
+            <li>الشاشة: 15.6 بوصة</li>
+            <li>كارت الشاشة: AMD RADEON VEGA 10 GRAPHICS</li>
+          </ul>
+          <span class="price">9500 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20755%20G5%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+
+      <div class="product" onclick="openModal('DELL 5400', '10500 جنيه', 'assets/DELL 5400.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%205400%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/DELL 5400.jpg" alt="DELL 5400">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">DELL 5400</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i5 الجيل الثامن</li>
+            <li>الرام: 8G</li>
+            <li>الهارد: 256 SSD</li>
+            <li>الشاشة: 14.1 بوصة</li>
+            <li>كارت الشاشة: INTEL HD 620</li>
+          </ul>
+          <span class="price">10500 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%205400%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+
+      <div class="product" onclick="openModal('HP ZBOOK 15 G5', '18000 جنيه', 'assets/HP ZBOOK 15 G5.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20ZBOOK%2015%20G5%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/HP ZBOOK 15 G5.jpg" alt="HP ZBOOK 15 G5">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">HP ZBOOK 15 G5</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i7 الجيل الثامن</li>
+            <li>الرام: 16G</li>
+            <li>الهارد: 256 SSD</li>
+            <li>الشاشة: 15.6 بوصة</li>
+            <li>كارت الشاشة: N.VIDIA P1000 4G UP TO 20G</li>
+          </ul>
+          <span class="price">18000 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20ZBOOK%2015%20G5%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+      
+      <div class="product" onclick="openModal('HP ELITEBOOK 1040 G4', '11000 جنيه', 'assets/HP ELITEBOOK 1040 G4.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20ELITEBOOK%201040%20G4%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/HP ELITEBOOK 1040 G4.jpg" alt="HP ELITEBOOK 1040 G4">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">HP ELITEBOOK 1040 G4</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i5 الجيل السابع</li>
+            <li>الرام: 16G</li>
+            <li>الهارد: 512 SSD</li>
+            <li>الشاشة: 14.1 بوصة</li>
+            <li>كارت الشاشة: INTEL HD 620</li>
+          </ul>
+          <span class="price">11000 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20ELITEBOOK%201040%20G4%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+      
+      <div class="product" onclick="openModal('DELL 7590', '25000 جنيه', 'assets/DELL 7590.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%207590%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/DELL 7590.jpg" alt="DELL 7590">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">DELL 7590</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i7 HQ الجيل التاسع</li>
+            <li>الرام: 16G</li>
+            <li>الهارد: 512 SSD</li>
+            <li>الشاشة: 15.6 بوصة</li>
+            <li>كارت الشاشة: N.VIDIA RTX 2060 6G UP TO 20G</li>
+          </ul>
+          <span class="price">25000 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%207590%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+      
+      <div class="product" onclick="openModal('DELL 5501', '14000 جنيه', 'assets/DELL 5501.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%205501%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/DELL 5501.jpg" alt="DELL 5501">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">DELL 5501</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i7 الجيل العاشر</li>
+            <li>الرام: 16G</li>
+            <li>الهارد: 512 SSD</li>
+            <li>الشاشة: 15.6 بوصة</li>
+            <li>كارت الشاشة: N.VIDIA M2000 4G UP TO 20G</li>
+          </ul>
+          <span class="price">14000 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%205501%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+
+      <div class="product" onclick="openModal('DELL PRECISION 5520', '14000 جنيه', 'assets/DELL PRECISION 5520.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%20PRECISION%205520%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/DELL PRECISION 5520.jpg" alt="DELL PRECISION 5520">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">DELL PRECISION 5520</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i7 HQ الجيل السابع</li>
+            <li>الرام: 16G</li>
+            <li>الهارد: 512 SSD</li>
+            <li>الشاشة: 15.6 بوصة</li>
+            <li>كارت الشاشة: N.VIDIA M1200 4G UP TO 20G</li>
+          </ul>
+          <span class="price">14000 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%20PRECISION%205520%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+      
+      <div class="product" onclick="openModal('DELL M6600', '7000 جنيه', 'assets/DELL M6600.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%20M6600%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/DELL M6600.jpg" alt="DELL M6600">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">DELL M6600</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i7 MQ الجيل الثاني</li>
+            <li>الرام: 8G</li>
+            <li>الهارد: 500 HDD</li>
+            <li>الشاشة: 17.3 بوصة</li>
+            <li>كارت الشاشة: N.VIDIA 1G</li>
+          </ul>
+          <span class="price">7000 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%20M6600%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+
+      <div class="product" onclick="openModal('HP 840 g3', '5500 جنيه', 'assets/HP 840 g3.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20840%20g3%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/HP 840 g3.jpg" alt="HP 840 g3">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">HP 840 g3</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i5 الجيل السادس</li>
+            <li>الرام: 8G</li>
+            <li>الهارد: 256 SSD</li>
+            <li>الشاشة: 14.1 بوصة</li>
+            <li>كارت الشاشة: INTEL HD 520</li>
+          </ul>
+          <span class="price">5500 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20840%20g3%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+      
+      <div class="product" onclick="openModal('HP ZBOOK G4', '11000 جنيه', 'assets/HP ZBOOK G4.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20ZBOOK%20G4%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/HP ZBOOK G4.jpg" alt="HP ZBOOK G4">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">HP ZBOOK G4</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i7 HQ الجيل السابع</li>
+            <li>الرام: 16G</li>
+            <li>الهارد: 256 SSD</li>
+            <li>الشاشة: 15.6 بوصة</li>
+            <li>كارت الشاشة: N.VIDIA M1200 4G UP TO 20G</li>
+          </ul>
+          <span class="price">11000 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20ZBOOK%20G4%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+
+      <div class="product" onclick="openModal('DELL 7577', '14000 جنيه', 'assets/DELL 7577.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%207577%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/DELL 7577.jpg" alt="DELL 7577">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">DELL 7577</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i7 HQ الجيل السابع</li>
+            <li>الرام: 16G</li>
+            <li>الهارد: 256 SSD + 1000 HDD</li>
+            <li>الشاشة: 15.6 بوصة</li>
+            <li>كارت الشاشة: N.VIDIA 1050 4G UP TO 20G</li>
+          </ul>
+          <span class="price">14000 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%207577%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+      
+      <div class="product" onclick="openModal('LENOVO P50', '11000 جنيه', 'assets/LENOVO P50.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20LENOVO%20P50%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/LENOVO P50.jpg" alt="LENOVO P50">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">LENOVO P50</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i7 HQ الجيل السادس</li>
+            <li>الرام: 16G</li>
+            <li>الهارد: 256 SSD</li>
+            <li>الشاشة: 15.6 بوصة</li>
+            <li>كارت الشاشة: N.VIDIA M1000M 2G UP TO 20G</li>
+          </ul>
+          <span class="price">11000 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20LENOVO%20P50%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+      
+      <div class="product" onclick="openModal('DELL 7720', '15000 جنيه', 'assets/DELL 7720.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%207720%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/DELL 7720.jpg" alt="DELL 7720">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">DELL 7720</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i7 HQ الجيل السابع</li>
+            <li>الرام: 16G</li>
+            <li>الهارد: 512 SSD</li>
+            <li>الشاشة: 17.3 بوصة</li>
+            <li>كارت الشاشة: N.VIDIA P3000 6G UP TO 20G</li>
+          </ul>
+          <span class="price">15000 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%207720%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+      
+      <div class="product" onclick="openModal('DELL M4700', '5000 جنيه', 'assets/DELL M4700.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%20M4700%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/DELL M4700.jpg" alt="DELL M4700">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">DELL M4700</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i7 MQ الجيل الثالث</li>
+            <li>الرام: 8G</li>
+            <li>الهارد: 256 SSD</li>
+            <li>الشاشة: 15.6 بوصة</li>
+            <li>كارت الشاشة: N.VIDIA K1000M 2G UP TO 20G</li>
+          </ul>
+          <span class="price">5000 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%20M4700%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+      
+      <div class="product" onclick="openModal('DELL 6440', '4200 جنيه', 'assets/DELL 6440.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%206440%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/DELL 6440.jpg" alt="DELL 6440">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">DELL 6440</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i5 الجيل الرابع</li>
+            <li>الرام: 8G</li>
+            <li>الهارد: 256 SSD</li>
+            <li>الشاشة: 14.1 بوصة</li>
+            <li>كارت الشاشة: INTEL HD</li>
+          </ul>
+          <span class="price">4200 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%206440%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+      
+      <div class="product" onclick="openModal('HP ZBOOK G5', '18000 جنيه', 'assets/HP ZBOOK G5.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20ZBOOK%20G5%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/HP ZBOOK G5.jpg" alt="HP ZBOOK G5">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">HP ZBOOK G5</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i7 الجيل الثامن</li>
+            <li>الرام: 16G</li>
+            <li>الهارد: 256 H SSD</li>
+            <li>الشاشة: 15.6 بوصة</li>
+            <li>كارت الشاشة: N.VIDIA P1000 4G UP TO 20G</li>
+          </ul>
+          <span class="price">18000 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20ZBOOK%20G5%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+      
+      <div class="product" onclick="openModal('DELL 7530', '18500 جنيه', 'assets/DELL 7530.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%207530%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/DELL 7530.jpg" alt="DELL 7530">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">DELL 7530</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i7 الجيل الثامن</li>
+            <li>الرام: 16G</li>
+            <li>الهارد: 512 H SSD</li>
+            <li>الشاشة: 15.6 بوصة</li>
+            <li>كارت الشاشة: N.VIDIA P1000 4G UP TO 20G</li>
+          </ul>
+          <span class="price">18500 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%207530%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+      
+      <div class="product" onclick="openModal('DELL 7530 (Xeon)', '20000 جنيه', 'assets/DELL 7530_Xeon.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%207530%20laptop%20with%20Xeon%20processor.', this)">
+        <div class="product-image-container">
+          <img src="assets/DELL 7530_Xeon.jpg" alt="DELL 7530 (Xeon)">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">DELL 7530 (Xeon)</h2>
+          <ul class="product-specs">
+            <li>المعالج: Xeon E-2176M الجيل التاسع</li>
+            <li>الرام: 16G</li>
+            <li>الهارد: 512 SSD</li>
+            <li>الشاشة: 15.6 بوصة</li>
+            <li>كارت الشاشة: N.VIDIA RTX A2000 4G UP TO 20G</li>
+          </ul>
+          <span class="price">20000 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%207530%20laptop%20with%20Xeon%20processor." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+
+      <div class="product" onclick="openModal('DELL 5530', '18500 جنيه', 'assets/DELL 5530.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%205530%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/DELL 5530.jpg" alt="DELL 5530">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">DELL 5530</h2>
+          <ul class="product-specs">
+            <li>المعالج: CORE i7 الجيل الثامن</li>
+            <li>الرام: 16G</li>
+            <li>الهارد: 512 H SSD</li>
+            <li>الشاشة: 15.6 بوصة</li>
+            <li>كارت الشاشة: N.VIDIA P1000 4G UP TO 20G</li>
+          </ul>
+          <span class="price">18500 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20DELL%205530%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+
+      <div class="product" onclick="openModal('HP ZBOOK G6 Studio 15', '21000 جنيه', 'assets/HP ZBOOK G6 Studio 15.jpg', 'whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20ZBOOK%20G6%20Studio%2015%20laptop.', this)">
+        <div class="product-image-container">
+          <img src="assets/HP ZBOOK G6 Studio 15.jpg" alt="HP ZBOOK G6 Studio 15">
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">HP ZBOOK G6 Studio 15</h2>
+          <ul class="product-specs">
+            <li>المعالج: Xeon E-2176M الجيل التاسع</li>
+            <li>الرام: 16G</li>
+            <li>الهارد: 512 SSD</li>
+            <li>الشاشة: 15.6 بوصة</li>
+            <li>كارت الشاشة: N.VIDIA P2000 4G UP TO 20G</li>
+          </ul>
+          <span class="price">21000 جنيه</span>
+          <a href="whatsapp://send?phone=01060169569&text=Hello%20Al-Hussein%20Laptops%2C%20I%20am%20interested%20in%20the%20HP%20ZBOOK%20G6%20Studio%2015%20laptop." class="call-btn"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+        </div>
+      </div>
+
     </div>
   </div>
 
   <footer class="footer">
-    <p>&copy; 2025 شركة الحسين للاب توب. جميع الحقوق محفوظة.</p>
-    <p>للتواصل: <a href="tel:+201060169569">01060169569</a> | <a href="https://wa.me/201060169569" target="_blank">واتساب</a></p>
-    <p>تم التطوير بواسطة: Gi</p>
+    <p>حقوق النشر © 2025 الحسين للاب توب. جميع الحقوق محفوظة.</p>
   </footer>
+
+  <div id="productModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <img id="modalProductImage" class="modal-image" src="" alt="Product Image">
+      <h3 id="modalProductName" class="modal-name"></h3>
+      <span id="modalProductPrice" class="modal-price"></span>
+      <ul id="modalProductSpecs" class="modal-specs"></ul>
+      <a id="modalWhatsappLink" href="#" class="call-btn" target="_blank"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+    </div>
+  </div>
 
   <script>
     const modal = document.getElementById("productModal");
     const modalProductImage = document.getElementById("modalProductImage");
     const modalProductName = document.getElementById("modalProductName");
-    const modalProductSpecs = document.getElementById("modalProductSpecs");
     const modalProductPrice = document.getElementById("modalProductPrice");
+    const modalProductSpecs = document.getElementById("modalProductSpecs");
     const modalWhatsappLink = document.getElementById("modalWhatsappLink");
+    const searchInput = document.getElementById('searchInput');
+    const products = document.querySelectorAll('.product');
 
-    function openModal(button) {
-      const productDiv = button.closest('.product');
-      const img = productDiv.querySelector('img');
-      const name = productDiv.querySelector('h2').innerText;
-      const specs = productDiv.querySelectorAll('ul li');
-      const price = productDiv.querySelector('.price').innerText;
-      const whatsappLink = productDiv.querySelector('.whatsapp').href;
+    searchInput.addEventListener('input', function() {
+      const searchTerm = searchInput.value.trim().toLowerCase();
+      products.forEach(product => {
+        const productName = product.querySelector('.product-name').innerText.toLowerCase();
+        if (productName.includes(searchTerm)) {
+          product.style.display = '';
+        } else {
+          product.style.display = 'none';
+        }
+      });
+    });
 
-      modalProductImage.src = img.src;
-      modalProductImage.alt = img.alt;
+    function openModal(name, price, imageSrc, whatsappLink, productElement) {
+      const specs = Array.from(productElement.querySelectorAll('.product-specs li'));
+      modalProductImage.src = imageSrc;
+      modalProductImage.alt = name;
       modalProductName.innerText = name;
       modalProductPrice.innerText = price;
       modalWhatsappLink.href = whatsappLink;
